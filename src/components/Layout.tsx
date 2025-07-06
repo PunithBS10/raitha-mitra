@@ -107,6 +107,9 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
             <p className="text-green-200">
               Empowering Karnataka Farmers | ಕರ್ನಾಟಕ ರೈತರನ್ನು ಸಶಕ್ತಗೊಳಿಸುವುದು
             </p>
+            <p className="text-green-200">
+              Created by the Punith Borehalli Somashekaraiah
+            </p>
           </div>
         </div>
       </footer>
