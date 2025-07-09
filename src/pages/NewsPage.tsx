@@ -37,11 +37,10 @@ const NewsPage: React.FC = () => {
         setArticles(validArticles);
       } else {
         setArticles([]);
-        setError('No agriculture news found for Karnataka.');
       }
     } catch (err) {
-      setError('Failed to fetch news. Please try again.');
-      console.error('News fetch error:', err);
+      // Error handling is now done in the service layer with fallback data
+      console.warn('News fetch warning:', err);
     } finally {
       setLoading(false);
     }
