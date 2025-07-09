@@ -588,7 +588,6 @@ const CropPricesPage: React.FC = () => {
                         <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
                           ₹{maxPrice.toLocaleString()}
                         </td>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-green-600">
                         <td className="px-6 py-4 whitespace-nowrap text-sm font-bold text-[#8FBC8B]">
                           ₹{modalPrice.toLocaleString()}
                         </td>
