@@ -15,8 +15,8 @@ interface NewsResponse {
   articles: NewsArticle[];
 }
 
-const API_KEY = '29e765a8cea64d0e8206f773f7b890f0';
-const BASE_URL = 'https://newsapi.org/v2/everything';
+// Use internal API route instead of direct NewsAPI calls
+const INTERNAL_API_URL = '/api/news';
 
 // Mock data for fallback when API fails
 const mockNewsData: NewsResponse = {
@@ -108,18 +108,11 @@ const mockNewsData: NewsResponse = {
 
 export const fetchKarnatakaAgricultureNews = async (): Promise<NewsResponse> => {
   try {
-    const params = new URLSearchParams({
-      q: 'karnataka agriculture',
-      language: 'en',
-      sortBy: 'publishedAt',
-      pageSize: '20',
-      apiKey: API_KEY
-    });
-
-    const response = await fetch(`${BASE_URL}?${params}`);
+    // Call our internal API route instead of NewsAPI directly
+    const response = await fetch(INTERNAL_API_URL);
     
     if (!response.ok) {
-      console.warn(`NewsAPI returned status ${response.status}. Using fallback mock data.`);
+      console.warn(`Internal API returned status ${response.status}. Using fallback mock data.`);
       // Return mock data when API fails
       return mockNewsData;
     }
@@ -128,13 +121,13 @@ export const fetchKarnatakaAgricultureNews = async (): Promise<NewsResponse> => 
     
     // If API returns no articles or invalid data, use mock data
     if (!data.articles || data.articles.length === 0) {
-      console.warn('NewsAPI returned no articles. Using fallback mock data.');
+      console.warn('Internal API returned no articles. Using fallback mock data.');
       return mockNewsData;
     }
     
     return data;
   } catch (error) {
-    console.warn('Error fetching news from API, using fallback mock data:', error);
+    console.warn('Error fetching news from internal API, using fallback mock data:', error);
     // Return mock data when there's a network error or other issues
     return mockNewsData;
   }
