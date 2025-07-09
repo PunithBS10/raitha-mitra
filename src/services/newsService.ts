@@ -130,21 +130,11 @@ export const fetchKarnatakaAgricultureNews = async (): Promise<NewsResponse> => 
     console.warn('Error fetching news from internal API, using fallback mock data:', error);
     // Return mock data when there's a network error or other issues
     return mockNewsData;
-  }
-};
-
-export const formatNewsDate = (dateString: string): string => {
-  try {
-    const date = new Date(dateString);
-    return date.toLocaleDateString('en-IN', {
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric',
-      hour: '2-digit',
-      minute: '2-digit'
-    });
-  } catch {
-    return dateString;
+    // Call our internal API route instead of NewsAPI directly
+    const response = await fetch(INTERNAL_API_URL);
+    console.warn('Error fetching news from internal API, using fallback mock data:', error);
+    // Return mock data when there's a network error or other issues
+    return mockNewsData;
   }
 };
 
@@ -155,7 +145,9 @@ export const getTimeAgo = (dateString: string): string => {
     const diffInHours = Math.floor((now.getTime() - date.getTime()) / (1000 * 60 * 60));
     
     if (diffInHours < 1) {
-      return 'Just now';
+      console.warn(`Internal API returned status ${response.status}. Using fallback mock data.`);
+      // Return mock data when API fails
+      return mockNewsData;
     } else if (diffInHours < 24) {
       return `${diffInHours} hour${diffInHours > 1 ? 's' : ''} ago`;
     } else {
@@ -165,4 +157,10 @@ export const getTimeAgo = (dateString: string): string => {
   } catch {
     return 'Recently';
   }
-};
+    // If API returns no articles or invalid data, use mock data
+    if (!data.articles || data.articles.length === 0) {
+      console.warn('Internal API returned no articles. Using fallback mock data.');
+      return mockNewsData;
+    }
+    
+    return data;

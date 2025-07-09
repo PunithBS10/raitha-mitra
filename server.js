@@ -19,11 +19,13 @@ app.get('/api/news', async (req, res) => {
   const NEWS_API_URL = 'https://newsapi.org/v2/everything';
 
   try {
+    console.log('Fetching news from NewsAPI...');
+    
     const params = new URLSearchParams({
       q: 'karnataka agriculture',
       language: 'en',
       sortBy: 'publishedAt',
-      pageSize: '20',
+      pageSize: '6',
       apiKey: NEWS_API_KEY
     });
 
@@ -34,13 +36,15 @@ app.get('/api/news', async (req, res) => {
     });
 
     if (!response.ok) {
+      console.error(`NewsAPI error: ${response.status} ${response.statusText}`);
       throw new Error(`NewsAPI error: ${response.status}`);
     }
 
     const data = await response.json();
+    console.log(`NewsAPI returned ${data.articles?.length || 0} articles`);
 
     // Filter and process articles
-    const processedArticles = data.articles
+    const processedArticles = (data.articles || [])
       .filter(article => 
         article.title && 
         article.description && 
@@ -48,7 +52,6 @@ app.get('/api/news', async (req, res) => {
         !article.title.includes('[Removed]') &&
         !article.description.includes('[Removed]')
       )
-      .slice(0, 6) // Return only top 6 articles
       .map(article => ({
         title: article.title,
         description: article.description,
@@ -56,9 +59,11 @@ app.get('/api/news', async (req, res) => {
         publishedAt: article.publishedAt,
         urlToImage: article.urlToImage || null,
         source: {
-          name: article.source.name
+          name: article.source?.name || 'Unknown Source'
         }
       }));
+
+    console.log(`Returning ${processedArticles.length} processed articles`);
 
     res.json({
       status: 'ok',
@@ -67,7 +72,7 @@ app.get('/api/news', async (req, res) => {
     });
 
   } catch (error) {
-    console.error('News API error:', error);
+    console.error('News API error:', error.message);
     
     // Return fallback mock data when API fails
     const mockData = {
@@ -76,7 +81,7 @@ app.get('/api/news', async (req, res) => {
       articles: [
         {
           title: "Karnataka Government Announces New Agricultural Subsidies for Farmers",
-          description: "The Karnataka state government has announced a comprehensive package of agricultural subsidies aimed at supporting farmers during the upcoming monsoon season.",
+          description: "The Karnataka state government has announced a comprehensive package of agricultural subsidies aimed at supporting farmers during the upcoming monsoon season. The package includes seed subsidies, fertilizer support, and irrigation assistance.",
           url: "https://example.com/karnataka-agriculture-subsidies",
           urlToImage: "https://images.pexels.com/photos/2132227/pexels-photo-2132227.jpeg?auto=compress&cs=tinysrgb&w=800",
           publishedAt: new Date(Date.now() - 2 * 60 * 60 * 1000).toISOString(),
@@ -84,7 +89,7 @@ app.get('/api/news', async (req, res) => {
         },
         {
           title: "Record Monsoon Expected to Boost Karnataka's Agricultural Output",
-          description: "Meteorological experts predict a record monsoon season for Karnataka, which is expected to significantly boost agricultural productivity across the state.",
+          description: "Meteorological experts predict a record monsoon season for Karnataka, which is expected to significantly boost agricultural productivity across the state. Farmers are preparing for increased cultivation activities.",
           url: "https://example.com/karnataka-monsoon-agriculture",
           urlToImage: "https://images.pexels.com/photos/1595104/pexels-photo-1595104.jpeg?auto=compress&cs=tinysrgb&w=800",
           publishedAt: new Date(Date.now() - 5 * 60 * 60 * 1000).toISOString(),
@@ -92,7 +97,7 @@ app.get('/api/news', async (req, res) => {
         },
         {
           title: "Digital Agriculture Initiative Launched in Rural Karnataka",
-          description: "A new digital agriculture initiative has been launched to help farmers in rural Karnataka access modern farming techniques and market prices.",
+          description: "A new digital agriculture initiative has been launched to help farmers in rural Karnataka access modern farming techniques, weather forecasts, and market prices through mobile applications.",
           url: "https://example.com/digital-agriculture-karnataka",
           urlToImage: "https://images.pexels.com/photos/5650026/pexels-photo-5650026.jpeg?auto=compress&cs=tinysrgb&w=800",
           publishedAt: new Date(Date.now() - 8 * 60 * 60 * 1000).toISOString(),
@@ -100,7 +105,7 @@ app.get('/api/news', async (req, res) => {
         },
         {
           title: "Karnataka Farmers Adopt Sustainable Farming Practices",
-          description: "Farmers across Karnataka are increasingly adopting sustainable and organic farming practices, leading to improved soil health and better crop yields.",
+          description: "Farmers across Karnataka are increasingly adopting sustainable and organic farming practices, leading to improved soil health and better crop yields while reducing environmental impact.",
           url: "https://example.com/sustainable-farming-karnataka",
           urlToImage: "https://images.pexels.com/photos/2518861/pexels-photo-2518861.jpeg?auto=compress&cs=tinysrgb&w=800",
           publishedAt: new Date(Date.now() - 12 * 60 * 60 * 1000).toISOString(),
@@ -108,7 +113,7 @@ app.get('/api/news', async (req, res) => {
         },
         {
           title: "New Irrigation Projects to Benefit Karnataka Farmers",
-          description: "The state government has approved several new irrigation projects that will provide water access to thousands of acres of farmland across Karnataka.",
+          description: "The state government has approved several new irrigation projects that will provide water access to thousands of acres of farmland across Karnataka, particularly in drought-prone regions.",
           url: "https://example.com/irrigation-projects-karnataka",
           urlToImage: "https://images.pexels.com/photos/1595108/pexels-photo-1595108.jpeg?auto=compress&cs=tinysrgb&w=800",
           publishedAt: new Date(Date.now() - 18 * 60 * 60 * 1000).toISOString(),
@@ -116,7 +121,7 @@ app.get('/api/news', async (req, res) => {
         },
         {
           title: "Coffee Production in Karnataka Reaches New Heights",
-          description: "Karnataka's coffee production has reached record levels this year, with improved cultivation techniques and favorable weather conditions.",
+          description: "Karnataka's coffee production has reached record levels this year, with improved cultivation techniques and favorable weather conditions contributing to the bumper harvest.",
           url: "https://example.com/coffee-production-karnataka",
           urlToImage: "https://images.pexels.com/photos/4021521/pexels-photo-4021521.jpeg?auto=compress&cs=tinysrgb&w=800",
           publishedAt: new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString(),
@@ -125,8 +130,14 @@ app.get('/api/news', async (req, res) => {
       ]
     };
 
+    console.log('Returning fallback mock data');
     res.json(mockData);
   }
+});
+
+// Health check endpoint
+app.get('/api/health', (req, res) => {
+  res.json({ status: 'ok', timestamp: new Date().toISOString() });
 });
 
 // Serve static files in production
@@ -139,5 +150,6 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
+  console.log(`🚀 Server running on port ${PORT}`);
+  console.log(`📰 News API available at http://localhost:${PORT}/api/news`);
 });
