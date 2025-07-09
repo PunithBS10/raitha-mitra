@@ -138,38 +138,40 @@ const AlertsPage: React.FC = () => {
     <div className="space-y-8">
       {/* Header */}
       <div>
-        <h1 className="text-3xl font-bold text-gray-900">Alerts & Notifications</h1>
-        <h2 className="text-2xl font-semibold text-green-600">ಎಚ್ಚರಿಕೆಗಳು ಮತ್ತು ಸೂಚನೆಗಳು</h2>
-        <p className="text-gray-600 mt-2">
+        <div className="text-center mb-8">
+          <h1 className="text-4xl font-bold text-gray-900 mb-2">Alerts & Notifications</h1>
+          <h2 className="text-2xl font-semibold text-[#8FBC8B] mb-4">ಎಚ್ಚರಿಕೆಗಳು ಮತ್ತು ಸೂಚನೆಗಳು</h2>
+          <p className="text-gray-600 text-lg">
           Stay updated with important alerts and notifications | ಪ್ರಮುಖ ಎಚ್ಚರಿಕೆಗಳು ಮತ್ತು ಸೂಚನೆಗಳೊಂದಿಗೆ ನವೀಕರಿಸಿರಿ
         </p>
+        </div>
       </div>
 
       {/* Unread Alerts */}
       {unreadAlerts.length > 0 && (
         <div>
-          <h3 className="text-2xl font-bold text-gray-900 mb-4">
+          <h3 className="text-2xl font-bold text-gray-900 mb-6">
             New Alerts ({unreadAlerts.length}) | ಹೊಸ ಎಚ್ಚರಿಕೆಗಳು ({unreadAlerts.length})
           </h3>
-          <div className="space-y-4">
+          <div className="space-y-6">
             {unreadAlerts.map((alert) => (
               <div
                 key={alert.id}
-                className={`${getAlertColor(alert.type)} border-l-4 border-l-current rounded-lg p-6 shadow-sm`}
+                className={`${getAlertColor(alert.type)} border-l-4 border-l-current rounded-2xl p-8 shadow-lg hover:shadow-xl transition-shadow`}
               >
                 <div className="flex items-start justify-between">
                   <div className="flex items-start space-x-3 flex-1">
                     {getAlertIcon(alert.type)}
                     <div className="flex-1">
-                      <div className="flex items-center space-x-2 mb-2">
-                        <h4 className="text-lg font-semibold text-gray-900">{alert.title}</h4>
-                        <span className="bg-red-100 text-red-800 text-xs px-2 py-1 rounded-full">NEW</span>
+                      <div className="flex items-center space-x-3 mb-3">
+                        <h4 className="text-xl font-bold text-gray-900">{alert.title}</h4>
+                        <span className="bg-red-500 text-white text-xs px-3 py-1 rounded-full font-semibold">NEW</span>
                       </div>
-                      <h5 className="text-md font-medium text-gray-700 mb-2">{alert.titleKn}</h5>
-                      <p className="text-gray-700 mb-2">{alert.message}</p>
-                      <p className="text-gray-600 text-sm mb-3">{alert.messageKn}</p>
+                      <h5 className="text-lg font-semibold text-gray-700 mb-3">{alert.titleKn}</h5>
+                      <p className="text-gray-700 mb-3 leading-relaxed">{alert.message}</p>
+                      <p className="text-gray-600 text-sm mb-4 leading-relaxed">{alert.messageKn}</p>
                       
-                      <div className="flex flex-col sm:flex-row sm:items-center sm:space-x-4 space-y-2 sm:space-y-0 text-sm text-gray-500">
+                      <div className="flex flex-col sm:flex-row sm:items-center sm:space-x-6 space-y-2 sm:space-y-0 text-sm text-gray-500">
                         <div className="flex items-center">
                           <Clock className="w-4 h-4 mr-1" />
                           <span>{formatTimestamp(alert.timestamp)}</span>
@@ -191,24 +193,24 @@ const AlertsPage: React.FC = () => {
       {/* Read Alerts */}
       {readAlerts.length > 0 && (
         <div>
-          <h3 className="text-2xl font-bold text-gray-900 mb-4">
+          <h3 className="text-2xl font-bold text-gray-900 mb-6">
             Previous Alerts | ಹಿಂದಿನ ಎಚ್ಚರಿಕೆಗಳು
           </h3>
-          <div className="space-y-4">
+          <div className="space-y-6">
             {readAlerts.map((alert) => (
               <div
                 key={alert.id}
-                className={`${getAlertColor(alert.type)} border rounded-lg p-6 opacity-75 hover:opacity-100 transition-opacity`}
+                className={`${getAlertColor(alert.type)} border rounded-2xl p-8 opacity-75 hover:opacity-100 transition-all hover:shadow-lg`}
               >
                 <div className="flex items-start space-x-3">
                   {getAlertIcon(alert.type)}
                   <div className="flex-1">
-                    <h4 className="text-lg font-semibold text-gray-900 mb-1">{alert.title}</h4>
-                    <h5 className="text-md font-medium text-gray-700 mb-2">{alert.titleKn}</h5>
-                    <p className="text-gray-700 mb-2">{alert.message}</p>
-                    <p className="text-gray-600 text-sm mb-3">{alert.messageKn}</p>
+                    <h4 className="text-xl font-bold text-gray-900 mb-2">{alert.title}</h4>
+                    <h5 className="text-lg font-semibold text-gray-700 mb-3">{alert.titleKn}</h5>
+                    <p className="text-gray-700 mb-3 leading-relaxed">{alert.message}</p>
+                    <p className="text-gray-600 text-sm mb-4 leading-relaxed">{alert.messageKn}</p>
                     
-                    <div className="flex flex-col sm:flex-row sm:items-center sm:space-x-4 space-y-2 sm:space-y-0 text-sm text-gray-500">
+                    <div className="flex flex-col sm:flex-row sm:items-center sm:space-x-6 space-y-2 sm:space-y-0 text-sm text-gray-500">
                       <div className="flex items-center">
                         <Clock className="w-4 h-4 mr-1" />
                         <span>{formatTimestamp(alert.timestamp)}</span>
@@ -227,7 +229,7 @@ const AlertsPage: React.FC = () => {
       )}
 
       {/* Footer Note */}
-      <div className="bg-gray-50 border border-gray-200 rounded-lg p-4">
+      <div className="bg-gray-50 border border-gray-200 rounded-2xl p-6">
         <p className="text-sm text-gray-700">
           <strong>Note:</strong> These alerts are automatically generated based on weather conditions, 
           market prices, and government announcements. For emergency situations, please contact local authorities.

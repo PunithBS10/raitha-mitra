@@ -156,8 +156,8 @@ const WeatherPage: React.FC = () => {
       {/* Header */}
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
         <div>
-          <h1 className="text-3xl font-bold text-gray-900">Weather Forecast</h1>
-          <h2 className="text-2xl font-semibold text-green-600">ಹವಾಮಾನ ಮುನ್ಸೂಚನೆ</h2>
+          <h1 className="text-4xl font-bold text-gray-900">Weather Forecast</h1>
+          <h2 className="text-2xl font-semibold text-[#8FBC8B]">ಹವಾಮಾನ ಮುನ್ಸೂಚನೆ</h2>
         </div>
         
         {/* City Selector */}
@@ -166,7 +166,7 @@ const WeatherPage: React.FC = () => {
           <select
             value={selectedCity}
             onChange={(e) => handleCityChange(e.target.value)}
-            className="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            className="px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-[#8FBC8B] focus:border-transparent transition-all shadow-sm"
           >
             {cities.map((city) => (
               <option key={city.value} value={city.value}>
@@ -179,8 +179,8 @@ const WeatherPage: React.FC = () => {
 
       {/* Current Location Indicator */}
       {isUsingCurrentLocation && (
-        <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
-          <div className="flex items-center text-blue-800">
+        <div className="bg-[#8FBC8B] bg-opacity-10 border border-[#8FBC8B] border-opacity-30 rounded-2xl p-4">
+          <div className="flex items-center text-[#8FBC8B]">
             <MapPin className="w-5 h-5 mr-2" />
             <span className="font-medium">
               Showing weather for your current location | ನಿಮ್ಮ ಪ್ರಸ್ತುತ ಸ್ಥಳದ ಹವಾಮಾನವನ್ನು ತೋರಿಸುತ್ತಿದೆ
@@ -190,19 +190,19 @@ const WeatherPage: React.FC = () => {
       )}
 
       {/* Current Weather */}
-      <div className="bg-gradient-to-br from-blue-400 to-blue-600 text-white rounded-lg p-6 shadow-lg">
+      <div className="bg-gradient-to-br from-blue-500 to-blue-700 text-white rounded-2xl p-8 shadow-xl">
         <div className="flex items-center justify-between mb-4">
           <div>
-            <h3 className="text-2xl font-bold">{weatherData.location.name}</h3>
-            <p className="text-lg text-blue-100">
+            <h3 className="text-3xl font-bold">{weatherData.location.name}</h3>
+            <p className="text-lg text-blue-200">
               {isUsingCurrentLocation ? 'ನಿಮ್ಮ ಪ್ರಸ್ತುತ ಸ್ಥಳ' : 
                cities.find(city => city.value === selectedCity)?.labelKn}
             </p>
           </div>
           <div className="text-right">
-            <div className="text-4xl font-bold">{Math.round(weatherData.current.temp_c)}°C</div>
-            <div className="text-lg">{weatherData.current.condition.text}</div>
-            <div className="text-sm text-blue-100">{getConditionInKannada(weatherData.current.condition.text)}</div>
+            <div className="text-5xl font-bold">{Math.round(weatherData.current.temp_c)}°C</div>
+            <div className="text-xl">{weatherData.current.condition.text}</div>
+            <div className="text-sm text-blue-200">{getConditionInKannada(weatherData.current.condition.text)}</div>
           </div>
         </div>
 
@@ -211,93 +211,93 @@ const WeatherPage: React.FC = () => {
         </div>
 
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-          <div className="bg-white bg-opacity-20 rounded-lg p-4 text-center">
+          <div className="bg-white bg-opacity-20 rounded-2xl p-6 text-center backdrop-blur-sm">
             <Droplets className="w-8 h-8 mx-auto mb-2" />
-            <div className="text-xl font-semibold">{weatherData.current.humidity}%</div>
-            <div className="text-sm">Humidity</div>
-            <div className="text-xs">ಆರ್ದ್ರತೆ</div>
+            <div className="text-2xl font-bold">{weatherData.current.humidity}%</div>
+            <div className="text-sm font-medium">Humidity</div>
+            <div className="text-xs text-blue-200">ಆರ್ದ್ರತೆ</div>
           </div>
-          <div className="bg-white bg-opacity-20 rounded-lg p-4 text-center">
+          <div className="bg-white bg-opacity-20 rounded-2xl p-6 text-center backdrop-blur-sm">
             <Wind className="w-8 h-8 mx-auto mb-2" />
-            <div className="text-xl font-semibold">{Math.round(weatherData.current.wind_kph)} km/h</div>
-            <div className="text-sm">Wind Speed</div>
-            <div className="text-xs">ಗಾಳಿ ವೇಗ</div>
+            <div className="text-2xl font-bold">{Math.round(weatherData.current.wind_kph)} km/h</div>
+            <div className="text-sm font-medium">Wind Speed</div>
+            <div className="text-xs text-blue-200">ಗಾಳಿ ವೇಗ</div>
           </div>
-          <div className="bg-white bg-opacity-20 rounded-lg p-4 text-center">
+          <div className="bg-white bg-opacity-20 rounded-2xl p-6 text-center backdrop-blur-sm">
             <Cloud className="w-8 h-8 mx-auto mb-2" />
-            <div className="text-xl font-semibold">{weatherData.current.cloud}%</div>
-            <div className="text-sm">Cloud Cover</div>
-            <div className="text-xs">ಮೋಡ ಆವರಣ</div>
+            <div className="text-2xl font-bold">{weatherData.current.cloud}%</div>
+            <div className="text-sm font-medium">Cloud Cover</div>
+            <div className="text-xs text-blue-200">ಮೋಡ ಆವರಣ</div>
           </div>
-          <div className="bg-white bg-opacity-20 rounded-lg p-4 text-center">
+          <div className="bg-white bg-opacity-20 rounded-2xl p-6 text-center backdrop-blur-sm">
             <Thermometer className="w-8 h-8 mx-auto mb-2" />
-            <div className="text-xl font-semibold">{Math.round(weatherData.current.temp_c)}°C</div>
-            <div className="text-sm">Temperature</div>
-            <div className="text-xs">ತಾಪಮಾನ</div>
+            <div className="text-2xl font-bold">{Math.round(weatherData.current.temp_c)}°C</div>
+            <div className="text-sm font-medium">Temperature</div>
+            <div className="text-xs text-blue-200">ತಾಪಮಾನ</div>
           </div>
         </div>
       </div>
 
       {/* Weather Details Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        <div className="bg-white rounded-lg shadow-lg p-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="bg-white rounded-2xl shadow-lg p-8 hover:shadow-xl transition-shadow">
           <div className="flex items-center mb-4">
             <Thermometer className="w-8 h-8 text-red-500 mr-3" />
             <div>
-              <h3 className="text-lg font-semibold text-gray-900">Temperature</h3>
+              <h3 className="text-xl font-bold text-gray-900">Temperature</h3>
               <p className="text-sm text-gray-600">ತಾಪಮಾನ</p>
             </div>
           </div>
-          <div className="text-3xl font-bold text-red-500 mb-2">
+          <div className="text-4xl font-bold text-red-500 mb-3">
             {Math.round(weatherData.current.temp_c)}°C
           </div>
-          <p className="text-gray-600">Current temperature in {weatherData.location.name}</p>
+          <p className="text-gray-600 leading-relaxed">Current temperature in {weatherData.location.name}</p>
         </div>
 
-        <div className="bg-white rounded-lg shadow-lg p-6">
+        <div className="bg-white rounded-2xl shadow-lg p-8 hover:shadow-xl transition-shadow">
           <div className="flex items-center mb-4">
             <Droplets className="w-8 h-8 text-blue-500 mr-3" />
             <div>
-              <h3 className="text-lg font-semibold text-gray-900">Humidity</h3>
+              <h3 className="text-xl font-bold text-gray-900">Humidity</h3>
               <p className="text-sm text-gray-600">ಆರ್ದ್ರತೆ</p>
             </div>
           </div>
-          <div className="text-3xl font-bold text-blue-500 mb-2">
+          <div className="text-4xl font-bold text-blue-500 mb-3">
             {weatherData.current.humidity}%
           </div>
-          <p className="text-gray-600">Relative humidity level</p>
+          <p className="text-gray-600 leading-relaxed">Relative humidity level</p>
         </div>
 
-        <div className="bg-white rounded-lg shadow-lg p-6">
+        <div className="bg-white rounded-2xl shadow-lg p-8 hover:shadow-xl transition-shadow">
           <div className="flex items-center mb-4">
-            <Wind className="w-8 h-8 text-green-500 mr-3" />
+            <Wind className="w-8 h-8 text-[#8FBC8B] mr-3" />
             <div>
-              <h3 className="text-lg font-semibold text-gray-900">Wind Speed</h3>
+              <h3 className="text-xl font-bold text-gray-900">Wind Speed</h3>
               <p className="text-sm text-gray-600">ಗಾಳಿ ವೇಗ</p>
             </div>
           </div>
-          <div className="text-3xl font-bold text-green-500 mb-2">
+          <div className="text-4xl font-bold text-[#8FBC8B] mb-3">
             {Math.round(weatherData.current.wind_kph)} km/h
           </div>
-          <p className="text-gray-600">Current wind speed</p>
+          <p className="text-gray-600 leading-relaxed">Current wind speed</p>
         </div>
       </div>
 
       {/* Farming Advisory */}
-      <div className="bg-green-50 border border-green-200 rounded-lg p-6">
-        <h3 className="text-xl font-bold text-green-800 mb-4">
+      <div className="bg-[#8FBC8B] bg-opacity-10 border border-[#8FBC8B] border-opacity-30 rounded-2xl p-8">
+        <h3 className="text-2xl font-bold text-[#8FBC8B] mb-6">
           Farming Advisory | ಕೃಷಿ ಸಲಹೆ
         </h3>
         
-        <div className="space-y-3">
+        <div className="space-y-4">
           {weatherData.current.temp_c > 30 && (
             <div className="flex items-start space-x-3">
-              <div className="w-2 h-2 bg-red-500 rounded-full mt-2"></div>
+              <div className="w-3 h-3 bg-red-500 rounded-full mt-2 flex-shrink-0"></div>
               <div>
-                <p className="text-green-800">
+                <p className="text-gray-800 font-medium">
                   <strong>High Temperature:</strong> Ensure adequate irrigation and provide shade for crops.
                 </p>
-                <p className="text-green-700 text-sm">
+                <p className="text-gray-700 text-sm mt-1">
                   <strong>ಹೆಚ್ಚಿನ ತಾಪಮಾನ:</strong> ಸಾಕಷ್ಟು ನೀರಾವರಿ ಮತ್ತು ಬೆಳೆಗಳಿಗೆ ನೆರಳು ಒದಗಿಸಿ.
                 </p>
               </div>
@@ -306,12 +306,12 @@ const WeatherPage: React.FC = () => {
           
           {weatherData.current.humidity > 80 && (
             <div className="flex items-start space-x-3">
-              <div className="w-2 h-2 bg-blue-500 rounded-full mt-2"></div>
+              <div className="w-3 h-3 bg-blue-500 rounded-full mt-2 flex-shrink-0"></div>
               <div>
-                <p className="text-green-800">
+                <p className="text-gray-800 font-medium">
                   <strong>High Humidity:</strong> Monitor crops for fungal diseases and ensure good ventilation.
                 </p>
-                <p className="text-green-700 text-sm">
+                <p className="text-gray-700 text-sm mt-1">
                   <strong>ಹೆಚ್ಚಿನ ಆರ್ದ್ರತೆ:</strong> ಶಿಲೀಂಧ್ರ ರೋಗಗಳಿಗಾಗಿ ಬೆಳೆಗಳನ್ನು ಮೇಲ್ವಿಚಾರಣೆ ಮಾಡಿ ಮತ್ತು ಉತ್ತಮ ಗಾಳಿ ಪ್ರವಾಹವನ್ನು ಖಚಿತಪಡಿಸಿ.
                 </p>
               </div>
@@ -320,12 +320,12 @@ const WeatherPage: React.FC = () => {
           
           {weatherData.current.wind_kph > 20 && (
             <div className="flex items-start space-x-3">
-              <div className="w-2 h-2 bg-yellow-500 rounded-full mt-2"></div>
+              <div className="w-3 h-3 bg-yellow-500 rounded-full mt-2 flex-shrink-0"></div>
               <div>
-                <p className="text-green-800">
+                <p className="text-gray-800 font-medium">
                   <strong>Strong Winds:</strong> Secure tall crops and avoid spraying pesticides.
                 </p>
-                <p className="text-green-700 text-sm">
+                <p className="text-gray-700 text-sm mt-1">
                   <strong>ಬಲವಾದ ಗಾಳಿ:</strong> ಎತ್ತರದ ಬೆಳೆಗಳನ್ನು ಭದ್ರಪಡಿಸಿ ಮತ್ತು ಕೀಟನಾಶಕ ಸಿಂಪಣೆಯನ್ನು ತಪ್ಪಿಸಿ.
                 </p>
               </div>
@@ -334,12 +334,12 @@ const WeatherPage: React.FC = () => {
           
           {weatherData.current.temp_c <= 30 && weatherData.current.humidity <= 80 && weatherData.current.wind_kph <= 20 && (
             <div className="flex items-start space-x-3">
-              <div className="w-2 h-2 bg-green-500 rounded-full mt-2"></div>
+              <div className="w-3 h-3 bg-[#8FBC8B] rounded-full mt-2 flex-shrink-0"></div>
               <div>
-                <p className="text-green-800">
+                <p className="text-gray-800 font-medium">
                   <strong>Good Conditions:</strong> Favorable weather for most farming activities.
                 </p>
-                <p className="text-green-700 text-sm">
+                <p className="text-gray-700 text-sm mt-1">
                   <strong>ಉತ್ತಮ ಪರಿಸ್ಥಿತಿಗಳು:</strong> ಹೆಚ್ಚಿನ ಕೃಷಿ ಚಟುವಟಿಕೆಗಳಿಗೆ ಅನುಕೂಲಕರ ಹವಾಮಾನ.
                 </p>
               </div>
@@ -349,7 +349,7 @@ const WeatherPage: React.FC = () => {
       </div>
 
       {/* Data Source */}
-      <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
+      <div className="bg-blue-50 border border-blue-200 rounded-2xl p-6">
         <p className="text-sm text-blue-800">
           <strong>Data Source:</strong> Weather data provided by WeatherAPI.com - Updated in real-time
         </p>

@@ -171,15 +171,17 @@ const CropPricesPage: React.FC = () => {
     <div className="space-y-6">
       {/* Header */}
       <div>
-        <h1 className="text-3xl font-bold text-gray-900">Live Crop & Vegetable Prices</h1>
-        <h2 className="text-2xl font-semibold text-green-600">ನೇರ ಬೆಳೆ ಮತ್ತು ತರಕಾರಿ ಬೆಲೆಗಳು</h2>
-        <p className="text-gray-600 mt-2">
+        <div className="text-center mb-8">
+          <h1 className="text-4xl font-bold text-gray-900 mb-2">Live Crop & Vegetable Prices</h1>
+          <h2 className="text-2xl font-semibold text-[#8FBC8B] mb-4">ನೇರ ಬೆಳೆ ಮತ್ತು ತರಕಾರಿ ಬೆಲೆಗಳು</h2>
+          <p className="text-gray-600 text-lg">
           Real-time market prices | ನೈಜ ಸಮಯದ ಮಾರುಕಟ್ಟೆ ಬೆಲೆಗಳು
         </p>
+        </div>
       </div>
 
       {/* Data Source Selector */}
-      <div className="bg-white rounded-lg shadow-md p-4">
+      <div className="bg-white rounded-2xl shadow-lg p-6 mb-8">
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
           <div className="flex items-center space-x-4">
             <span className="text-sm font-medium text-gray-700">Data Source:</span>
@@ -188,7 +190,7 @@ const CropPricesPage: React.FC = () => {
                 onClick={() => setDataSource('sheet')}
                 className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors flex items-center ${
                   dataSource === 'sheet'
-                    ? 'bg-green-500 text-white'
+                    ? 'bg-[#8FBC8B] text-white shadow-md'
                     : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
                 }`}
               >
@@ -199,7 +201,7 @@ const CropPricesPage: React.FC = () => {
                 onClick={() => setDataSource('api')}
                 className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors flex items-center ${
                   dataSource === 'api'
-                    ? 'bg-blue-500 text-white'
+                    ? 'bg-blue-500 text-white shadow-md'
                     : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
                 }`}
               >
@@ -211,11 +213,11 @@ const CropPricesPage: React.FC = () => {
           
           <div className="text-sm text-gray-600">
             {dataSource === 'sheet' ? (
-              <span className="bg-green-100 text-green-800 px-2 py-1 rounded">
+              <span className="bg-[#8FBC8B] bg-opacity-10 text-[#8FBC8B] px-3 py-1 rounded-full text-sm font-medium">
                 Data Source: Live from Sheet (API fallback)
               </span>
             ) : (
-              <span className="bg-blue-100 text-blue-800 px-2 py-1 rounded">
+              <span className="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm font-medium">
                 Data Source: Government of India API
               </span>
             )}
@@ -224,7 +226,7 @@ const CropPricesPage: React.FC = () => {
       </div>
 
       {/* Filters and Search */}
-      <div className="bg-white rounded-lg shadow-md p-6">
+      <div className="bg-white rounded-2xl shadow-lg p-8 mb-8">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
           {/* Search */}
           <div className="md:col-span-2">
@@ -238,11 +240,11 @@ const CropPricesPage: React.FC = () => {
                 onChange={handleSearchInputChange}
                 onKeyPress={handleKeyPress}
                 placeholder="Enter crop name (e.g., Rice, Wheat, Tomato)"
-                className="flex-1 px-4 py-2 border border-gray-300 rounded-l-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                className="flex-1 px-4 py-3 border border-gray-300 rounded-l-xl focus:ring-2 focus:ring-[#8FBC8B] focus:border-transparent transition-all"
               />
               <button
                 onClick={handleSearch}
-                className="px-4 py-2 bg-green-500 text-white rounded-r-lg hover:bg-green-600 transition-colors flex items-center"
+                className="px-6 py-3 bg-[#8FBC8B] text-white rounded-r-xl hover:bg-[#7AA87A] transition-colors flex items-center shadow-md"
               >
                 <Search className="w-4 h-4" />
               </button>
@@ -262,7 +264,7 @@ const CropPricesPage: React.FC = () => {
                   <select
                     value={selectedDistrict}
                     onChange={(e) => setSelectedDistrict(e.target.value)}
-                    className="flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                    className="flex-1 px-3 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-[#8FBC8B] focus:border-transparent transition-all"
                   >
                     <option value="all">All Districts</option>
                     {availableDistricts.map((district) => (
@@ -284,7 +286,7 @@ const CropPricesPage: React.FC = () => {
                   <select
                     value={selectedMarket}
                     onChange={(e) => setSelectedMarket(e.target.value)}
-                    className="flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                    className="flex-1 px-3 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-[#8FBC8B] focus:border-transparent transition-all"
                   >
                     <option value="all">All Markets</option>
                     {availableMarkets.map((market) => (
@@ -308,7 +310,7 @@ const CropPricesPage: React.FC = () => {
                   <select
                     value={selectedMandi}
                     onChange={(e) => setSelectedMandi(e.target.value)}
-                    className="flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                    className="flex-1 px-3 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-[#8FBC8B] focus:border-transparent transition-all"
                   >
                     <option value="all">All Mandis</option>
                     {availableMandis.map((mandi) => (
@@ -325,7 +327,7 @@ const CropPricesPage: React.FC = () => {
         </div>
 
         {/* Results Count */}
-        <div className="mt-4 text-sm text-gray-600">
+        <div className="mt-6 text-sm text-gray-600 font-medium">
           Showing {dataCount} results | {dataCount} ಫಲಿತಾಂಶಗಳನ್ನು ತೋರಿಸುತ್ತಿದೆ
         </div>
       </div>
@@ -342,7 +344,7 @@ const CropPricesPage: React.FC = () => {
               const priceChange = getMockPriceChange(modalPrice);
               
               return (
-                <div key={index} className="bg-white rounded-lg shadow-md p-4 border-l-4 border-l-green-500">
+                <div key={index} className="bg-white rounded-2xl shadow-lg p-6 border-l-4 border-l-[#8FBC8B] hover:shadow-xl transition-shadow">
                   <div className="flex justify-between items-start mb-3">
                     <div className="flex-1">
                       <h3 className="text-lg font-semibold text-gray-900">{price.cropName}</h3>
@@ -352,7 +354,7 @@ const CropPricesPage: React.FC = () => {
                       <p className="text-sm text-gray-600">{price.mandiName}</p>
                     </div>
                     <div className="text-right">
-                      <div className="text-2xl font-bold text-green-600">₹{modalPrice.toLocaleString()}</div>
+                      <div className="text-3xl font-bold text-[#8FBC8B]">₹{modalPrice.toLocaleString()}</div>
                       <div className={`flex items-center text-sm ${getPriceChangeColor(priceChange)}`}>
                         {getPriceChangeIcon(priceChange)}
                         <span className="ml-1">{priceChange >= 0 ? '+' : ''}{priceChange.toFixed(1)}%</span>
@@ -380,42 +382,42 @@ const CropPricesPage: React.FC = () => {
           </div>
 
           {/* Price Table - Desktop */}
-          <div className="hidden md:block bg-white rounded-lg shadow-lg overflow-hidden">
+          <div className="hidden md:block bg-white rounded-2xl shadow-lg overflow-hidden">
             <div className="overflow-x-auto">
               <table className="min-w-full divide-y divide-gray-200">
-                <thead className="bg-green-50">
+                <thead className="bg-[#8FBC8B] bg-opacity-10">
                   <tr>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    <th className="px-6 py-4 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">
                       Crop Name
-                      <div className="text-gray-400 normal-case">ಬೆಳೆ ಹೆಸರು</div>
+                      <div className="text-gray-500 normal-case font-normal">ಬೆಳೆ ಹೆಸರು</div>
                     </th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    <th className="px-6 py-4 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">
                       Kannada Name
-                      <div className="text-gray-400 normal-case">ಕನ್ನಡ ಹೆಸರು</div>
+                      <div className="text-gray-500 normal-case font-normal">ಕನ್ನಡ ಹೆಸರು</div>
                     </th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    <th className="px-6 py-4 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">
                       Mandi Name
-                      <div className="text-gray-400 normal-case">ಮಂಡಿ ಹೆಸರು</div>
+                      <div className="text-gray-500 normal-case font-normal">ಮಂಡಿ ಹೆಸರು</div>
                     </th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    <th className="px-6 py-4 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">
                       Min Price
-                      <div className="text-gray-400 normal-case">ಕನಿಷ್ಠ ಬೆಲೆ</div>
+                      <div className="text-gray-500 normal-case font-normal">ಕನಿಷ್ಠ ಬೆಲೆ</div>
                     </th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    <th className="px-6 py-4 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">
                       Max Price
-                      <div className="text-gray-400 normal-case">ಗರಿಷ್ಠ ಬೆಲೆ</div>
+                      <div className="text-gray-500 normal-case font-normal">ಗರಿಷ್ಠ ಬೆಲೆ</div>
                     </th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    <th className="px-6 py-4 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">
                       Modal Price
-                      <div className="text-gray-400 normal-case">ಮೋಡಲ್ ಬೆಲೆ</div>
+                      <div className="text-gray-500 normal-case font-normal">ಮೋಡಲ್ ಬೆಲೆ</div>
                     </th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    <th className="px-6 py-4 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">
                       Change
-                      <div className="text-gray-400 normal-case">ಬದಲಾವಣೆ</div>
+                      <div className="text-gray-500 normal-case font-normal">ಬದಲಾವಣೆ</div>
                     </th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    <th className="px-6 py-4 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">
                       Date
-                      <div className="text-gray-400 normal-case">ದಿನಾಂಕ</div>
+                      <div className="text-gray-500 normal-case font-normal">ದಿನಾಂಕ</div>
                     </th>
                   </tr>
                 </thead>
@@ -427,11 +429,11 @@ const CropPricesPage: React.FC = () => {
                     const priceChange = getMockPriceChange(modalPrice);
                     
                     return (
-                      <tr key={index} className="hover:bg-green-50">
+                      <tr key={index} className="hover:bg-gray-50 transition-colors">
                         <td className="px-6 py-4 whitespace-nowrap">
-                          <div className="text-sm font-medium text-gray-900">{price.cropName}</div>
+                          <div className="text-sm font-semibold text-gray-900">{price.cropName}</div>
                         </td>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm text-green-700 font-medium" style={{ fontFamily: 'Noto Sans Kannada, sans-serif' }}>
+                        <td className="px-6 py-4 whitespace-nowrap text-sm text-[#8FBC8B] font-semibold" style={{ fontFamily: 'Noto Sans Kannada, sans-serif' }}>
                           {price.kannadaName}
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
@@ -443,7 +445,7 @@ const CropPricesPage: React.FC = () => {
                         <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
                           ₹{maxPrice.toLocaleString()}
                         </td>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-green-600">
+                        <td className="px-6 py-4 whitespace-nowrap text-sm font-bold text-[#8FBC8B]">
                           ₹{modalPrice.toLocaleString()}
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap text-sm">
@@ -477,7 +479,7 @@ const CropPricesPage: React.FC = () => {
               const priceChange = getMockPriceChange(modalPrice);
               
               return (
-                <div key={index} className="bg-white rounded-lg shadow-md p-4 border-l-4 border-l-green-500">
+                <div key={index} className="bg-white rounded-2xl shadow-lg p-6 border-l-4 border-l-[#8FBC8B] hover:shadow-xl transition-shadow">
                   <div className="flex justify-between items-start mb-3">
                     <div className="flex-1">
                       <h3 className="text-lg font-semibold text-gray-900">{price.commodity}</h3>
@@ -488,7 +490,7 @@ const CropPricesPage: React.FC = () => {
                       <p className="text-xs text-gray-400">{price.district}</p>
                     </div>
                     <div className="text-right">
-                      <div className="text-2xl font-bold text-green-600">₹{modalPrice.toLocaleString()}</div>
+                      <div className="text-3xl font-bold text-[#8FBC8B]">₹{modalPrice.toLocaleString()}</div>
                       <div className={`flex items-center text-sm ${getPriceChangeColor(priceChange)}`}>
                         {getPriceChangeIcon(priceChange)}
                         <span className="ml-1">{priceChange >= 0 ? '+' : ''}{priceChange.toFixed(1)}%</span>
@@ -587,6 +589,7 @@ const CropPricesPage: React.FC = () => {
                           ₹{maxPrice.toLocaleString()}
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-green-600">
+                        <td className="px-6 py-4 whitespace-nowrap text-sm font-bold text-[#8FBC8B]">
                           ₹{modalPrice.toLocaleString()}
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap text-sm">
@@ -620,7 +623,7 @@ const CropPricesPage: React.FC = () => {
       )}
 
       {/* Footer Note */}
-      <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
+      <div className="bg-blue-50 border border-blue-200 rounded-2xl p-6">
         <p className="text-sm text-blue-800">
           <strong>Data Source:</strong> {dataSource === 'sheet' ? 'Live Google Sheet with real-time updates' : 'Government of India Open Data Platform - Updated regularly from various mandis across Karnataka.'}
         </p>
@@ -634,7 +637,7 @@ const CropPricesPage: React.FC = () => {
         <button
           onClick={loadCropPrices}
           disabled={loading}
-          className="px-6 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 transition-colors flex items-center mx-auto disabled:opacity-50"
+          className="px-8 py-3 bg-[#8FBC8B] text-white rounded-xl hover:bg-[#7AA87A] transition-colors flex items-center mx-auto disabled:opacity-50 font-semibold shadow-md hover:shadow-lg"
         >
           <RefreshCw className={`w-4 h-4 mr-2 ${loading ? 'animate-spin' : ''}`} />
           Refresh Data | ಡೇಟಾ ರಿಫ್ರೆಶ್ ಮಾಡಿ

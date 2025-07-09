@@ -97,20 +97,22 @@ const NewsPage: React.FC = () => {
     <div className="space-y-8">
       {/* Header */}
       <div>
-        <h1 className="text-3xl font-bold text-gray-900">Government News & Schemes</h1>
-        <h2 className="text-2xl font-semibold text-green-600">ಸರ್ಕಾರಿ ಸುದ್ದಿ ಮತ್ತು ಯೋಜನೆಗಳು</h2>
+        <div className="text-center mb-8">
+          <h1 className="text-4xl font-bold text-gray-900 mb-2">Government News & Schemes</h1>
+          <h2 className="text-2xl font-semibold text-[#8FBC8B]">ಸರ್ಕಾರಿ ಸುದ್ದಿ ಮತ್ತು ಯೋಜನೆಗಳು</h2>
+        </div>
       </div>
 
       {/* Government Schemes Section */}
       <div>
-        <h3 className="text-2xl font-bold text-gray-900 mb-4">
+        <h3 className="text-2xl font-bold text-gray-900 mb-6">
           Government Schemes | ಸರ್ಕಾರಿ ಯೋಜನೆಗಳು
         </h3>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {schemes.map((scheme) => (
-            <div key={scheme.id} className="bg-green-50 border border-green-200 rounded-lg p-6 hover:shadow-md transition-shadow">
+            <div key={scheme.id} className="bg-[#8FBC8B] bg-opacity-10 border border-[#8FBC8B] border-opacity-30 rounded-2xl p-8 hover:shadow-lg transition-all hover:border-[#8FBC8B]">
               <div className="flex items-center justify-between mb-3">
-                <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800">
+                <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-[#8FBC8B] text-white">
                   <Tag className="w-3 h-3 mr-1" />
                   {scheme.category}
                 </span>
@@ -120,15 +122,15 @@ const NewsPage: React.FC = () => {
                 </div>
               </div>
               
-              <h4 className="text-lg font-semibold text-gray-900 mb-2">{scheme.title}</h4>
-              <h5 className="text-md font-medium text-green-700 mb-3">{scheme.titleKn}</h5>
+              <h4 className="text-xl font-bold text-gray-900 mb-2">{scheme.title}</h4>
+              <h5 className="text-lg font-semibold text-[#8FBC8B] mb-4">{scheme.titleKn}</h5>
               
-              <p className="text-gray-700 mb-2">{scheme.summary}</p>
-              <p className="text-gray-600 text-sm mb-4">{scheme.summaryKn}</p>
+              <p className="text-gray-700 mb-3 leading-relaxed">{scheme.summary}</p>
+              <p className="text-gray-600 text-sm mb-6 leading-relaxed">{scheme.summaryKn}</p>
               
               <a
                 href={scheme.readMoreUrl}
-                className="inline-flex items-center text-green-600 hover:text-green-800 font-medium"
+                className="inline-flex items-center text-[#8FBC8B] hover:text-[#7AA87A] font-semibold transition-colors"
               >
                 Read More | ಹೆಚ್ಚು ಓದಿ
                 <ExternalLink className="w-4 h-4 ml-1" />
@@ -140,14 +142,14 @@ const NewsPage: React.FC = () => {
 
       {/* Latest News Section */}
       <div>
-        <h3 className="text-2xl font-bold text-gray-900 mb-4">
+        <h3 className="text-2xl font-bold text-gray-900 mb-6">
           Latest News | ಇತ್ತೀಚಿನ ಸುದ್ದಿ
         </h3>
-        <div className="space-y-4">
+        <div className="space-y-6">
           {news.map((item) => (
-            <div key={item.id} className="bg-white border border-gray-200 rounded-lg p-6 hover:shadow-md transition-shadow">
+            <div key={item.id} className="bg-white border border-gray-200 rounded-2xl p-8 hover:shadow-lg transition-all hover:border-gray-300">
               <div className="flex flex-col md:flex-row md:items-center justify-between mb-3">
-                <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-800 w-fit">
+                <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-blue-500 text-white w-fit">
                   <Tag className="w-3 h-3 mr-1" />
                   {item.category} | {item.categoryKn}
                 </span>
@@ -157,15 +159,15 @@ const NewsPage: React.FC = () => {
                 </div>
               </div>
               
-              <h4 className="text-lg font-semibold text-gray-900 mb-2">{item.title}</h4>
-              <h5 className="text-md font-medium text-blue-700 mb-3">{item.titleKn}</h5>
+              <h4 className="text-xl font-bold text-gray-900 mb-2">{item.title}</h4>
+              <h5 className="text-lg font-semibold text-blue-600 mb-4">{item.titleKn}</h5>
               
-              <p className="text-gray-700 mb-2">{item.summary}</p>
-              <p className="text-gray-600 text-sm mb-4">{item.summaryKn}</p>
+              <p className="text-gray-700 mb-3 leading-relaxed">{item.summary}</p>
+              <p className="text-gray-600 text-sm mb-6 leading-relaxed">{item.summaryKn}</p>
               
               <a
                 href={item.readMoreUrl}
-                className="inline-flex items-center text-blue-600 hover:text-blue-800 font-medium"
+                className="inline-flex items-center text-blue-600 hover:text-blue-700 font-semibold transition-colors"
               >
                 Read More | ಹೆಚ್ಚು ಓದಿ
                 <ExternalLink className="w-4 h-4 ml-1" />
@@ -176,7 +178,7 @@ const NewsPage: React.FC = () => {
       </div>
 
       {/* Footer Note */}
-      <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-4">
+      <div className="bg-yellow-50 border border-yellow-200 rounded-2xl p-6">
         <p className="text-sm text-yellow-800">
           <strong>Note:</strong> For official verification of any scheme or news, please visit the official government websites or contact your local agricultural officer.
         </p>
