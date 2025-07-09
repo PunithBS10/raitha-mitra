@@ -164,3 +164,4 @@ export const getTimeAgo = (dateString: string): string => {
     }
     
     return data;
+}
